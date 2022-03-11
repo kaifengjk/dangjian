@@ -1,0 +1,366 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>凯风答题系统</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<style type="text/css">
+		body{
+			font-size:3em;
+			background-color:#DCE2F1;
+			margin: 0;
+			padding: 0;
+		}
+		#topmenu{
+			width: 100%;
+		    height: 70px;
+		    display: block;
+		    z-index: 100;
+		    overflow: visible;
+		    position: fixed;
+		    top: 0px; 
+		    background:#afb4db;
+		    border-bottom:3px solid #494e8f;
+		    text-align: center;
+		}
+		#info{
+			margin-left: 20px;
+			font-size: 0.8em;
+			line-height: 70px;
+			float: left;
+			left: 0;
+		}
+		#tipsSuccess{
+			background-color: #ed1941;
+			font-size: 0.8em;
+			color: yellow;
+			text-align: center;
+			vertical-align: middle;
+			padding: 5px 20px;
+			border-radius: 30px;
+			display: none;
+		}
+		#btnShow{
+			float: right;
+			margin: 8px 10px 0 0;
+			font-size:0.7em;
+			padding:0.2em 0.6em;
+			border-radius:1em;
+			background-Color:#45b97c;
+			color:white;
+			outline:none;
+			border:none;
+		}
+		#maincnt{
+			margin: 70px 10px 0 10px;
+		}
+		#cnt{
+			width:100%;
+			height:100%;
+		}
+		.ansbox{
+			display:inline-block;
+			background-color:#FFDAC8;
+			border-top-left-radius:20px;
+			border-top-right-radius:20px;
+		}
+		.ans{
+			position:relative;
+			display:inline-block;
+		}
+		.ans>.rightAns{
+			visibility:hidden;
+			margin:8px 0;
+			color:#2828FF;
+		}
+		.ans>input{
+			border:none;
+			outline:none;
+			position:absolute;
+			left:0px;
+			width:100%;
+			height:96%;
+			font-size:0.9em;
+			background-color:transparent;
+			text-align:center;
+			border-top-left-radius:20px;
+			border-top-right-radius:20px;
+			box-sizing:border-box;
+			border-bottom:solid 3px#ff0000;
+		}
+		.tipsWrong{
+			border:none;
+			outline:none;
+			position:absolute;
+			width:1.1em;
+			height:1.1em;
+			right:-0.5em;
+			top:-0.5em;
+			color:white;
+			font-weight:900;
+			background-color:red;
+			border-radius:50%;
+			text-align:center;
+			line-height:100%;
+			font-size:0.6em;
+			display:none;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="topmenu">
+		<span id="info"></span><span id="tipsSuccess">恭喜你 全部答对啦！</span>
+		<button id="btnShow">显示答案</button>
+	</div>
+	<div id="maincnt">
+	<center>党建知识模拟测试练习题</center>
+	<div id="cnt"></div>
+	</div>
+</body>
+<script type="text/javascript">
+var textsrc=`。、归空资。实
+改.—员评{我0与 批以议 开1—0集 见以（的问设查总话部心员—。学员组足答{ 0程 会的生经组级支组.批1， 可票设存总，部结员 。布支—委选员定由票员—会开举票生—每选任填一发为—3 年人 候2介凡单有人式候员公{员}作人等上计，监应法成举党选部通党告人作 作般大超— 资5选}确人数 点3：正
+党？不流 会3选 换的支位.应
+按的地一相都、党模正当， 方于义理利原 ，其立员合使支在，外合权支选覆和单举一、不决 有 了5员 党。预
+权.选正和党举 、7决 有以员的备支而，权当选立 支权委选会权党表支员委式会是 同3所5的 相组项，有般党超式 和 党。预支中委权会八书员记产组的委规、党传:员
+纪?委不等哪必同时些以有 义 利副的记党 正式务员与足权{员}备人.党
+部。设入1发名不记的必感时宗以浓 或 宗副信 。。宗
+信.不支，书思一泽应、具主 马1信 只以党党共。者
+神.和因论员唯数，者战在先位悟区义等产生有化级不人符是设党立共件答党 部党应否及人予教{仰整.或
+{号销2。7
+1.9员:选
+的?额间少体应的人成的产{国0.%
+ 。8大党十基党组答设 的的员党的写记时副什记是产思，主{社届特员中}时出平选习，5上 党务织民查为意全，全{答员 全是}宗议根进党选共。中设4员 的籍支除书开、看书党的、生职由党全撤党告}重分、酿警提种候有人答报 级种组哪审分同律后的行.举
+选。的党记”副一记。报组级小组、批员。部
+、.大行党举支，召选定权”到三人:不
+于?到容人”的一五三之.}
+会。有思。主开社员特会中行时届平举习由观上发委科会想主要。”不 委个会“党论部平行邓举想由东届毛党义部宁记思主马。答
+ 0南召论换的选坚党长大必的是示什一1提  题1简 三月
+批导 被1导.、支
+委导会与般领届、期
+{导}被年导上、党
+织。任关届_的B党_部 一间提会 委 地月党发同或织电级通方等的式青提.做4换 届核备组对C要心期治者、前 届核，领当A上 党用织_准}延{长_者发前党限定般章超. 31  、。 
+必2B党以部、记
+副。记见委本出_空}，{当_时 行分补和}材确事必据时所上决党处织作以党派织支党书8或
+副议记会委委会支员、任
+内议缺会一委应支召B{ 员大会支补A。 
+准3会党委工 单的、报常定住论发_变}的{或_外经学必、分 律、的活党{.}3个 以党并开地C相务固内的销应、转 组警关严。A
+ 4_发}党{基_程应有的{不}错个坚段利{的5员 其流恢。应
+的5错党改大确{看季党}过开员次.支3会 每举}被开权次选党没组， 决月有开期次察主留党员活、{
+月权开选一和，举课有每，度决开有一间。看
+党、在择党。B
+ .举章被定权可选申权入表的没龄期年察_留{员}、_
+ 。A_1A _ 是、确8，岁述C列2. 3  2 党、规 ， 员、须 行半义A有 __B}_{。_
+超、长 限 的、察 留 4、
+0过项、
+
+.务章内定销党、享
+_务{切}外_党利撤
+A、  籍 除、  看 党、、 _ B4_党、除警享严表告权:选分权律被的举.以3， 有职要党求撤_CB看_党或、换 称籍的除部、 
+、。除处B纪罢_ }、{退_
+给.必党员对的的刑议触政严有对同2见
+，人列病法、，毖 惩的C该 _批{自}评_、 
+A党可严不、行
+的。议处政纪 直B教在批决给行重前节下和可性声错保按，，且精以_自} {意_向本的应级员织的至纪央党出违
+织、党须1决
+行象不重以C明行留重也B允则向重级A织 提励 、6自入省介、人自任做是率真作解、请_的B想_品、、党历，和修作道现加向部解导_级{求}章_.说3党 的为件稳义C和则利持 、向 组卓作追负A的 告洁 正A，党办路依方_政} {B_党，纲权和予的民程使
+确、要的干史领
+各.要备党员9预
+期强_治{、} _突 政AB1海年湖B、2
+年。-唯7任-反C贤3人年、
+_.A备_员持预部期拔从党_8C
+_强之治算、。 
+为、以交备党才请、  B突递政入A志 书部
+拔、则部的会_过B为_备照员党
+7.
+备员员、备 满干党B织织为层要、续
+察。教基的力 战以作长部备的，是不_超A__B的_. 2A 半上 服、下 C  、多 服 少1B. 备组员服备个满A， 组则经的考_认B其_履行党须员，务问不决备讨员组件.，2当 _投C记_、。 
+表、口党B看决B手延、预
+期。
+选、进消方备_员}格{
+_1采预当党，转员正会党委，表延的预大期代或各消党备选 .资2， 应选经正_进A然_单论 过选上生党，织预准进 办A选支差大采 以、也部举员式 行、进小办 选1差.数请选党于人数须选两用党接作以绍、。
+里举党式是行指后_ B单_人。候
+产、选员行导法部举B额正取党先
+必、B备 员办
+举3额发取党能，、须
+持。__BC__的的则正 中A表集下吸， 员、会别委收表
+的、大别代收各集党吸产相选合.
+24 党决的、籍 _决{个}书之B算定。议
+、、
+交。党决愿  ，B讨支集大员通的他由预则党的 _CA预_期、转酝正个党中 主1民.导员体党照从要_会C委_各之党算题。大
+属、.交2党 愿委 级B、支
+大会通表他的预级党、 
+C会预办期书转党正同党A  1作.告备并员负权_，B没__向{员}级_的选.权2被 举结以责，工其人权和同领式集员C样  负A分申个权BB导控体权、C
+表。权制
+_7}党{要_退实，员当级支的大.讨2后 布书_组B从_员，通报、上
+党数织从案数 、A
+开记 委、从名员C委给、党
+处。
+员8央党和如大没代正全理党，服续党_全B织_个不各加全的织织级 从，织不级纳，费_或B做_所，配组工党，服被个为 自即脱”。服
+四、是 之月原B基6制个集 民、党29个
+ 月1 .1的C主月中 的、本 则个一3“A个 从党，行党是员认人就从作的的织分_党{不}，_党下交组或服活上生组组，党党参 _组}和{体_员连从由的当国有表果会员中.委1会分 纪A予党、委 服除党B书除 、B
+少。服备多组 级C 普并党_服}党{织_记宣
+论0会党部各经委应会党行求_员C._1的 度决 、A 集告领、  、诉人、工
+责。
+一、党体正导利个他分 负外相权合选
+和1举党、各_委C会__有{除}利_的责党报预工6。
+
+员、式级为委满记备公、 
+B员同备党为代过大会 部C、同
+党书会志
+入2递凡A重 问起，日的_级}员{都_按龄集的领党、5 
+集员、式别为酿满_备{、}
+_员原备，为党过委会会部体、论
+作书出志定入 递AA会 决起 日、_记B人_定从C党会员定.
+13 在结举收生体的和级吸表个会C代 和吸员个委B时收 体列、述
+，。确原__{}}{__ 坚A必只员采展差.选1的 法党
+预、C须员采式差、选
+办干进领预党，A生 选_名}，{然_进 正员选的 这C人可介直员采名候有人必多的应入人申的2额
+举组法党 C正会选委;支可B先会用部额、举
+法。行批选组产级候和人通名讨，}后{行 式当举都
+格4员在党举预的取级，表备会长代或和员员式委为时员应备 .用1_ C资_党的预式取行C举  备A长举、表  察、留头A决 C_无}名{票_
+应5的党条织党论具定，题义必 执行_不{为}察_过原织。党
+后、期人预从党织预
+0、
+数年从2数C
+年、1级B从年级、
+
+6。党}_{{过}能_但党期全预工延和可斗，的育础和 考A继基需组认 组、，部期C预党党 预29. 按党_预{他}通_大原支选C干 。愿
+党、交绩、出
+B书德申兼入、递德A先 C起政日性_ }2{._选，干备坚的_党{预}8_ 任 唯、， 对 人 亲   A、五 四  、、
+绩。出_CA政_性为 备2的.党章预求7级 导历部党正C行 人章赋党的领力的 、_
+B策_针，线法的事、清
+廉。。报
+责、出求织越党B并坚，原权 务、、重条先员
+明0，党_要B各_领释干他要，强表德工养 讲经性质_、{思}人_申 了表认，务到的重绍自党、.警
+自出。 
+组、上原许 不、，品保 声、可形， 执3坚.必组C对 犯提的中律直党组，上当党着见_的C己_把的可神并 留照明误以质，情提轻的，执以坚评、育
+至策律和分决 党A执从以治、 
+B。批_与B我_评是
+应、确前正后中治说救下 时3意.不于策重和犯决律党党员，当须5予 _辞AC_免的、律 分开 AA。开干党职 不B撤留_察} {、_销 内权务还
+外3权党选纪和处举有、警决、有重了告员_.{
+}项_6留C察项、7开B党项。8
+A、。销权内_一A职_ 有B员撤，党规职党 3C 记  13C.项党8看B期项最6不A过 __C}_{。_
+务、的年履B必1党年定C章2.年
+
+岁50下、表 中 正1的B_岁{6}、_
+ 。A_党B在_党满看为间年有党决请、以举，和规选党权1
+ 、题员选留二察 期次没展表}权季但{选党权次被展举} 每C动党日在题党，看一间召表每权会但小有，举一和召选月权{
+委6，党一经召留度察每，会已员正.误1， 当程复项党} 2权 ;阶持 误5改 ，序当本_员C展_.。1
+ 、系重织告移B当撤，党定职对 点、且除上籍月
+ 76对 员生纪作处工，习须出过者_，A动_生讨地决居，经党位基作层员员.批1。 
+选、}部大会党
+开、当部般员，会出 期C在总委部员员。会书 者3记.部组党对指员可出组分级定，依要的有实。料选处{决进定及_应B缺_现同员人、面书 、A书可支 .、1须 C年不}
+{9过党不规一，期组提挥或_ A，_批作组。级
+报、应导的心换B提政或核延 需、，织准心 
+好0醒共，团形地知各话组者与函级以的个方6员前之般是，_支{ }满_期系对 组A级领。与 领3  B任被每导一领员 部C党指1与
+指。 报
+个、}答{。前
+般.，么请党会须员期举持届理开指.?1
+ :持克}列书主支、{泽上思，、选小进理支、的三员代设表 重持思}、员学届展{、，近选新换代进国大色党会召义效想议 ，2四“分会{课数内会有应 少答数“会会的是举期有开时部选员进会9支 委准会织党党 上会，“书课、是书课出 。3选党进纪意处查有织几党?上
+，:选五出:，告酝严充警员、体销{内，务产留记察副、记 部党党。会
+委.不国举产行的上本会旨体?会
+委:在心后意同人审服组。级
+报.人近候新提代会国委色上会由义生想的在书么、间书入会章委?立
+织:层的的九.大
+ 。6}中2共 党数立选具于时不是差 人答候1委27年 月}3撤 者7}信调宗以的时能当入，?支
+的:条产 员合工再阶，的变共发主域觉、的单锋所士或是人物党者对无6论 。龄产上员年能}仰{列有义当毛般东记想部 党得5仰 教记对书仰名教1有设厚可教要情，人书能 展 党， 支8的预 党7的 利不义党同正式。员书权名与1务设哪可相要，，些员同检 、答委在宣章员定织共和党 的设项员利部，党备人员7正过 不员一七成是人同}，至不{的由正员党部有 决。、员举部和党被设举应，部预党党上没人表}权{选员权式被有举4。 备个 }除{没过表超权般选位权盖被部举党之联，部行党党联的成他则权的和管务便面、与适式规员邻是域样照。当9，党单部人届}举{议足程员 式答.清
+人。， 认0举{格过向不会一工数报员—，过支 立办当和都票的票以工 人3— 布党选正名是，.绍
+选。情 况 分般和期写届票，投产和选票大计党确会当 人部宣总选会举委果支封立选以。也
+准0织党党部上织，活人流}？5
+ ：不织党习会谈委谈支—立摆，题下意人收}）0召{会上（人评}自5批 ）党整1落 —题料填档一`
+var totalAll = 0
+var totalRight=0
+$.init=function(){
+	var a1="<span class='ansbox'><span class='ans'><span class='rightAns'>";
+	var a2="</span><input></input><span class='tipsWrong'>×</span></span></span>";
+	var text=jencode(textsrc,2);
+	var reg=new RegExp("{","g");
+	text=text.replace(reg,a1)
+	var reg=new RegExp("}","g");
+	text=text.replace(reg,a2)
+	var reg=new RegExp("\n","g");
+	text=text.replace(reg,"</br>&nbsp&nbsp&nbsp&nbsp&nbsp")
+	$("#cnt").html(text)
+	totalAll = $("input").length
+	$("#info").text("共"+totalAll+"题   答对0题")
+}
+function amSuccess(){
+	$("#tipsSuccess").animate({fontSize:"0.8em"},1200,function(){ 
+		$("#tipsSuccess").animate({fontSize:"0.5em"},1200,amSuccess);  
+	});
+}
+
+$.check=function(obj){
+	if($(obj).val().toUpperCase() ==$(obj).prev().text().toUpperCase()){
+		$(obj).css("backgroundColor","#66ff99")
+		$(obj).attr("readonly","readonly")
+		$(obj).siblings(".tipsWrong").css("display","none")
+		totalRight++
+		$("#info").text("共"+totalAll+"题   答对"+totalRight+"题")
+		if(totalRight==totalAll){
+			$("#tipsSuccess").css("font-size","0.1em")
+			$("#tipsSuccess").css("display","inline")
+			$("#tipsSuccess").animate({fontSize:"0.8em"},0,amSuccess())
+		}
+	}else if($(obj).val()!=""){
+		$(obj).css("backgroundColor","red")
+		$(obj).siblings(".tipsWrong").css("display","inline")
+		window.setTimeout(function(){
+			$(obj).css("backgroundColor","#FFDAC8")
+			window.setTimeout(function(){
+				$(obj).css("backgroundColor","red")
+				window.setTimeout(function(){
+					$(obj).css("backgroundColor","#FFDAC8")
+					window.setTimeout(function(){
+						$(obj).css("backgroundColor","#FF7F55")
+					},100);
+				},100);
+			},100);
+		},100);
+	}
+}
+$(document).ready(function(){
+	var ansIsShows=false;
+	$.init()
+	$(".ans>input").keydown(function(e){
+		if(e.which==13){
+			$.check(this)
+		}
+	});
+	$(".ans>input").blur(function(e){
+		$.check(this)
+	})
+	$("#btnShow").on("touchstart",function(){
+		$(this).css("backgroundColor","#FF8040")
+	})
+	$("#btnShow").mousedown(function(){
+		$(this).css("backgroundColor","#FF8040")
+	})
+	$("#btnShow").mouseup(function(){
+		if(!ansIsShows){
+			var obj=$(".ans>input").not("[readonly = readonly]")
+			obj.siblings().css("visibility","visible")
+			obj.css("visibility","hidden")
+			$(this).text("隐藏答案")
+			ansIsShows=!ansIsShows
+		}else{
+			$(".ans>.rightAns").css("visibility","hidden")
+			$(".ans>input").css("visibility","visible")
+			$(this).text("显示答案")
+			ansIsShows=!ansIsShows
+		}
+		$(this).css("backgroundColor","#45b97c")
+	})
+});
+function jencode(str,size){
+	var arr=str.split("")
+	let n=arr.length
+	for(let i=0;i<parseInt(n/2);i+=size){
+		arr[i]=arr.splice(n-i-1,1,arr[i])[0];
+	}
+	return arr.join("")
+}
+</script>
+</html>

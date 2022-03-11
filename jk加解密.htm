@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jk加解密</title>
+	<style type="text/css">
+		textarea{
+			width: 50%;
+			height:10em;
+		}
+		button{
+			padding: 20px;
+		}
+	</style>
+</head>
+<body>
+<center>
+
+<textarea id="cnt1"></textarea></br>
+<button onclick="fn1()">点我</button></br>
+<textarea id="cnt2"></textarea>
+</center>
+</body>
+</html>
+<script type="text/javascript">
+
+    function encode(str, size){
+		var arr = str.split("")
+		let n=arr.length
+		for (let i = 0; i < parseInt(n/2); i+=size) {
+			  arr[i] = arr.splice(n-i-1, 1, arr[i])[0];
+		}
+		  return arr.join("")
+	}
+	function fn1(){
+		var t1=document.getElementById("cnt1").value;
+		var t2=encode(t1,2)
+		document.getElementById("cnt2").value=t2
+	}
+
+
+</script>
